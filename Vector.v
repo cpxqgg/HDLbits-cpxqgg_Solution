@@ -65,3 +65,38 @@ module top_module (
     assign {w, x, y, z} = {a, b, c, d, e, f, 2'b11};
 
 endmodule
+
+//--------------7: Vectorr-----------//
+module top_module( 
+    input [7:0] in,
+    output [7:0] out
+);
+    always@(*)begin
+        for(int i=0; i<8; i=i+1)begin
+            out[i] = in[7-i];
+        end  
+    end    
+endmodule
+
+//--------------8: Vector4-----------//
+module top_module (
+    input [7:0] in,
+    output [31:0] out );//
+
+    assign out = { {24{in[7]}}, in };
+
+endmodule
+
+//--------------9: Vector5-----------//
+module top_module (
+    input a, b, c, d, e,
+    output [24:0] out );//
+    
+    wire [24:0] first, second;
+    
+    assign first = {{5{a}}, {5{b}}, {5{c}}, {5{d}}, {5{e}}};
+    assign second = {5{a, b, c, d, e}};
+    assign out = ~ first ^ second;
+
+endmodule
+
